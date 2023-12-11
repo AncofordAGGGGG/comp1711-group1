@@ -1,0 +1,28 @@
+void optionB();
+void optionC();
+void optionD();
+void optionE();
+void optionF();
+
+case 'B':
+            case 'b':
+                optionB();
+                break;
+            case 'C':
+            case 'c':
+                optionC();
+                break;
+            case 'D':
+            case 'd':
+                optionD();
+                break;
+            case 'E':
+            case 'e':
+                optionE();
+                break;
+            case 'F':
+            case 'f':
+                optionF();
+                break;
+
+                void optionA(struct FitnessRecord *data, int *records, const char *filename)
