@@ -12,7 +12,11 @@ typedef struct {
 } FitnessData;
 
 void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *steps) {
-    sscanf(record, "%10[^,],%5[^,],%d", date, time, steps);
+    if (sscanf(record, "%10[^,],%5[^,],%d", date, time, steps) != 3) {
+        // Failed to parse all three values
+        printf("Error: Invalid record format: %s\n", record);
+        exit(1);
+    }
 }
 
 int readRecords(const char *filename, FitnessData **records, int *recordCount) {
