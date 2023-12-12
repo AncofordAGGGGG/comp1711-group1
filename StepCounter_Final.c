@@ -13,7 +13,13 @@ struct FitnessRecord {
 };
 
 void displayMenu();
+void displayDateTimeRecords(struct FitnessRecord *records, int recordCount);
 void importFromFile(struct FitnessRecord *data, int *records, const char *filename);
+void displayTotalRecords(struct FitnessRecord *records, int recordCount);
+void findMinStepsPeriod(struct FitnessRecord *records, int recordCount);
+void findMaxStepsPeriod(struct FitnessRecord *records, int recordCount);
+void calculateAverageSteps(struct FitnessRecord *records, int recordCount);
+void findLongestOver500Period(struct FitnessRecord *records, int recordCount);
 void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps) {
     
     char *inputCopy = strdup(input);
@@ -56,7 +62,29 @@ int main() {
                 scanf("%s", filename);
                 importFromFile(fitnessData, &numRecords, filename);
                 break;
-            
+            case 'B':
+            case 'b':
+                displayTotalRecords(fitnessData, numRecords);
+                break;
+            case 'C':
+            case 'c':
+                findMinStepsPeriod(fitnessData, numRecords);
+                displayDateTimeRecords(fitnessData, numRecords);
+                break;
+            case 'D':
+            case 'd':
+                findMaxStepsPeriod(fitnessData, numRecords);
+                displayDateTimeRecords(fitnessData, numRecords);
+                break;
+            case 'E':
+            case 'e':
+                calculateAverageSteps(fitnessData, numRecords);
+                break;
+            case 'F':
+            case 'f':
+                findLongestOver500Period(fitnessData, numRecords);
+                displayDateTimeRecords(fitnessData, numRecords);
+                break;
             case 'Q':
             case 'q':
                 printf("Thank you ^_^ Goodbye!\n");
@@ -66,6 +94,8 @@ int main() {
         }
 
     }while (choice != 'Q' && choice != 'q');
+
+    free(fitnessData);
 
     return 0;
 }
@@ -103,4 +133,35 @@ FILE *file;
     fclose(file);
 
 printf("File successfully loaded.");
+}
+
+
+void displayTotalRecords(struct FitnessRecord *records, int recordCount) {
+    printf("Total number of records: %d\n", recordCount);
+}
+
+void findMinStepsPeriod(struct FitnessRecord *records, int recordCount) {
+    void displayDateTimeRecords(struct FitnessRecord *records, int recordCount) {
+        for (int i = 0; i < 11; ++i) {
+            printf("%d\n", fitnessData[i]. steps);
+        }
+    }
+
+}
+void findMaxStepsPeriod(struct FitnessRecord *records, int recordCount) {
+    void displayDateTimeRecords(struct FitnessRecord *records, int recordCount) {
+        for (int i = 0; i > 1099; ++i) {
+            printf("%d\n", fitnessData[i]. steps);
+        }
+    }
+}
+void calculateAverageSteps(struct FitnessRecord *records, int recordCount) {
+    printf("Average steps: %d\n", recordCount);
+}
+void findLongestOver500Period(struct FitnessRecord *records, int recordCount) {
+    void displayDateTimeRecords(struct FitnessRecord *records, int recordCount) {
+        for (int i = 0; i < 1101; i > 599++i) {
+            printf("%d\n", fitnessData[i]. steps);
+        }
+    }
 }
