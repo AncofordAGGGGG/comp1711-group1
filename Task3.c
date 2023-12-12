@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_FILENAME_LENGTH 50
-#define MAX_LINE_LENGTH 100
+#define MAX_FILENAME_LENGTH 716
+#define MAX_LINE_LENGTH 716
 
 typedef struct {
     char date[11];
@@ -13,7 +13,6 @@ typedef struct {
 
 void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *steps) {
     if (sscanf(record, "%10[^,],%5[^,],%d", date, time, steps) != 3) {
-        // Failed to parse all three values
         printf("Error: Invalid record format: %s\n", record);
         exit(1);
     }
