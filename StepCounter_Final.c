@@ -13,7 +13,6 @@ struct FitnessRecord {
 };
 
 void displayMenu();
-void displayDateTimeRecords(struct FitnessRecord *records, int recordCount);
 void importFromFile(struct FitnessRecord *data, int *records, const char *filename);
 void displayTotalRecords(struct FitnessRecord *records, int recordCount);
 void findMinStepsPeriod(struct FitnessRecord *records, int recordCount);
@@ -69,12 +68,10 @@ int main() {
             case 'C':
             case 'c':
                 findMinStepsPeriod(fitnessData, numRecords);
-                displayDateTimeRecords(fitnessData, numRecords);
                 break;
             case 'D':
             case 'd':
                 findMaxStepsPeriod(fitnessData, numRecords);
-                displayDateTimeRecords(fitnessData, numRecords);
                 break;
             case 'E':
             case 'e':
@@ -83,7 +80,6 @@ int main() {
             case 'F':
             case 'f':
                 findLongestOver500Period(fitnessData, numRecords);
-                displayDateTimeRecords(fitnessData, numRecords);
                 break;
             case 'Q':
             case 'q':
@@ -141,27 +137,61 @@ void displayTotalRecords(struct FitnessRecord *records, int recordCount) {
 }
 
 void findMinStepsPeriod(struct FitnessRecord *records, int recordCount) {
-    void displayDateTimeRecords(struct FitnessRecord *records, int recordCount) {
-        for (int i = 0; i < 11; ++i) {
-            printf("%d\n", fitnessData[i]. steps);
+   int minIndex = 0;
+
+    for (int i = 1; i < recordCount; ++i) {
+        if (records[i].steps < records[minIndex].steps) {
+            minIndex = i;
         }
     }
 
+    printf("Minimum steps: %d\n", records[minIndex].steps);
+    printf("Date and time for minimum steps: %s %s\n", records[minIndex].date, records[minIndex].time);
 }
+
 void findMaxStepsPeriod(struct FitnessRecord *records, int recordCount) {
-    void displayDateTimeRecords(struct FitnessRecord *records, int recordCount) {
-        for (int i = 0; i > 1099; ++i) {
-            printf("%d\n", fitnessData[i]. steps);
+    int maxIndex = 0;
+
+    for (int i = 1; i < recordCount; ++i) {
+        if (records[i].steps > records[maxIndex].steps) {
+            maxIndex = i;
         }
     }
+
+    printf("Maximum steps: %d\n", records[maxIndex].steps);
+    printf("Date and time for maximum steps: %s %s\n", records[maxIndex].date, records[maxIndex].time);
 }
 void calculateAverageSteps(struct FitnessRecord *records, int recordCount) {
-    printf("Average steps: %d\n", recordCount);
+    int totalSteps = 0;
+    for (int i = 0; i < recordCount; ++i) {
+        totalSteps += records[i].steps;
+    }
+
+    if (recordCount > 0) {
+        float averageSteps = (float)totalSteps / recordCount;
+        printf("Average steps: %.2f\n", averageSteps);
+    } else {
+        printf("No records to calculate average.\n");
+    }
 }
 void findLongestOver500Period(struct FitnessRecord *records, int recordCount) {
-    void displayDateTimeRecords(struct FitnessRecord *records, int recordCount) {
-        for (int i = 0; i < 1101; i > 599++i) {
-            printf("%d\n", fitnessData[i]. steps);
+    int currentStreak = 0;
+    int longestStreak = 0;
+
+    for (int i = 0; i < recordCount - 1; ++i) {
+        if (records[i].steps > 500) {
+            currentStreak++;
+            if (currentStreak > longestStreak) {
+                longestStreak = currentStreak;
+            }
+        } else {
+            currentStreak = 0;
         }
+    }
+
+    if (longestStreak > 0) {
+        printf("Longest continuous period with steps over 500: %d\n", longestStreak);
+    } else {
+        printf("No continuous period with steps over 500.\n");
     }
 }
